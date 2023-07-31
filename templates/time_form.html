@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Time Form</title>
+  </head>
+  <body>
+    <form action="{{ url_for('submit_form') }}" method="POST">
+      <label for="myInput">Enter Interval for Reminder:</label>
+      <input type="text" name="myInput" id="myInput">
+      <button type="submit">Submit</button>
+    </form>
+  </body>
+</html>
