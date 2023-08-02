@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 from apscheduler.schedulers.background import BackgroundScheduler
 
 app = Flask(__name__)
@@ -13,6 +13,11 @@ def remind_to_drink():
 @app.route('/time-form')
 def time_form():
     return render_template('time_form.html')
+
+@app.route('/submit-form', methods=['POST'])
+def submit_form():
+    user_input = request.form['myInput']
+    return f'You entered {user_input}'
 
 @app.route('/', methods=['POST', 'GET'])
 
