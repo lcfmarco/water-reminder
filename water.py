@@ -1,14 +1,16 @@
 from flask import Flask, render_template, redirect, url_for, request
 from apscheduler.schedulers.background import BackgroundScheduler
+import subprocess
 
 app = Flask(__name__)
 scheduler = BackgroundScheduler()
 
-def hello():
-    return "Hello World!"
+def send_macos_notification():
+    script = f'display notification "hi" with title "Reminder"'
+    subprocess.run(['osascript', '-e', script])
 
 def remind_to_drink():
-    # Prints reminder message t
+    # Prints reminder message
     print("Take a sip of your water bottle!")
 
 # @app.route('/time-form')
@@ -18,7 +20,7 @@ def remind_to_drink():
 @app.route('/submit-form', methods=['POST'])
 def submit_form():
     user_input = request.form['myInput']
-    scheduler.add_job(func=remind_to_drink, trigger='interval', seconds=int(user_input))
+    scheduler.add_job(func=send_macos_notification, trigger='interval', seconds=int(user_input))
     scheduler.start()
     return f'Reminder set for every {user_input} seconds'
 
