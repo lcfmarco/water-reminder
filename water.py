@@ -6,7 +6,7 @@ app = Flask(__name__)
 scheduler = BackgroundScheduler()
 
 def send_macos_notification():
-    script = f'display notification "hi" with title "Reminder"'
+    script = f'display notification "Drink up!" with title "Reminder"'
     subprocess.run(['osascript', '-e', script])
 
 def remind_to_drink():
